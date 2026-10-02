@@ -1,6 +1,9 @@
 # 编译产物
 build/
 
+# 发行用的 PDF（由 build.ps1 产出后改名的副本）
+*.pdf
+
 # LaTeX 中间文件
 *.aux
 *.log
