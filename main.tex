@@ -1,0 +1,96 @@
+%% =====================================================================
+%%  main.tex — 《如何跟人类沟通：从入门到精通》主文件
+%%  编译：latexmk -xelatex main.tex
+%% =====================================================================
+\documentclass{hci-manual}
+
+%% ---- 元数据（与 00-阅读须知.md 的「文档信息」表一致） ----
+\renewcommand{\hciDocNumber}{HCI-2026-001}
+\renewcommand{\hciDocName}{人类接口使用手册}
+\renewcommand{\hciVersion}{v2.3}
+\renewcommand{\hciUpdateDate}{2026-09-28}
+\renewcommand{\hciReviewStatus}{未审核。本手册未经人类通读。}
+
+\begin{document}
+
+%% =====================================================================
+%%  前置页
+%% =====================================================================
+\pagenumbering{Roman}
+\pagestyle{empty}
+
+%% ---------- 封面：前封单页，满版（170×240mm 无白边） ----------
+%% 用 tikz 覆盖层贴到页面上，不动版心（\newgeometry 会先 \clearpage，多出空白页）
+\thispagestyle{empty}%
+\begin{tikzpicture}[remember picture, overlay]
+  \node[inner sep=0pt, anchor=north west] at (current page.north west)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{cover.png}};
+\end{tikzpicture}
+\clearpage
+
+%% ---------- 扉页：文档信息 ----------
+\clearpage
+\pagestyle{hcifancy}
+\hciFrontHeading{文档信息}
+
+\begin{manstable}{P{3.4cm} L}
+\tbh{项} & \tbh{内容} \\
+\midrule
+文档编号   & \code{\hciDocNumber} \\
+名称       & \hciDocName \\
+版本       & \code{\hciVersion} \\
+上次更新   & \hciUpdateDate \\
+适用范围   & \hciScope \\
+状态       & \hciSystemState \\
+读者       & \hciAudience \\
+生成方式   & 由\hciGenerator \\
+\textbf{审核状态} & \textbf{\color{hciStampRed}\hciReviewStatus} \\
+预计学习时间 & \hciStudyTime \\
+\bottomrule
+\end{manstable}
+
+%% ---------- 目录 ----------
+\clearpage
+\renewcommand{\contentsname}{目录}
+\tableofcontents
+
+%% ---------- 正文 ----------
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{hcifancy}
+\hciStartBody
+\setcounter{chapter}{-1}      % 让第 0 章编号为 0
+
+\input{chapters/ch00-readme}
+
+%% ---------- 第一部分　传输层 ----------
+\part{传输层：把意思完整地送出去}
+\input{chapters/ch01-request-format}
+\input{chapters/ch02-retransmit}
+\input{chapters/ch03-ack}
+\input{chapters/ch04-snr}
+
+%% ---------- 第二部分　应用层 ----------
+\part{应用层：听懂没说的}
+\input{chapters/ch05-implicit}
+\input{chapters/ch06-nothing}
+\input{chapters/ch07-irony}
+\input{chapters/ch08-boundary}
+\input{chapters/ch09-emotional}
+\input{chapters/ch10-rumination}
+
+%% ---------- 第三部分　会话层 ----------
+\part{会话层：人还在的时候}
+\input{chapters/ch11-conflict}
+\input{chapters/ch12-time}
+\input{chapters/ch13-mastery}
+
+%% =====================================================================
+%%  附录
+%% =====================================================================
+\appendix
+\input{chapters/appendix-a-errors}
+\input{chapters/appendix-b-versions}
+\input{chapters/appendix-c-terms}
+
+\end{document}
